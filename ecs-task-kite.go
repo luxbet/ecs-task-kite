@@ -57,7 +57,7 @@ func _main() int {
 	}
 
 	client := ecsclient.New(*cluster, "", nil, nil)
-	proxyTasks(client, family, service, name, public)
+	proxyTasks(client, family, service, name, public, sleep)
 	return 0
 }
 
@@ -102,7 +102,7 @@ func collectTaskUpdates(client ecsclient.ECSSimpleClient, family, service *strin
 				taskUpdates <- tasks
 			}
 			log.Debug("Sleeping until next update")
-			time.Sleep((time.Duration(rand.Intn(5)) + sleep) * time.Second)
+			time.Sleep((time.Duration(rand.Intn(5)) + time.Duration(sleep)) * time.Second)
 		}
 	}()
 	return taskUpdates
