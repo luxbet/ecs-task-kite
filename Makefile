@@ -20,7 +20,7 @@ all: static-go-binary ./misc/ca-bundle.crt
 
 static-go-binary:
 	@mkdir -p bin
-	CGO_ENABLED=0 go build -a -installsuffix cgo -o ./bin/ecs-task-kite github.com/awslabs/ecs-task-kite/
+	CGO_ENABLED=0 go build -a -installsuffix cgo -o ./bin/ecs-task-kite github.com/luxbet/ecs-task-kite/
 
 generate:
 	go generate ./lib/...

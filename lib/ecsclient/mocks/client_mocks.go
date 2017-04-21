@@ -4,10 +4,10 @@
 package mock_ecsclient
 
 import (
-	ecsclient "github.com/awslabs/ecs-task-kite/lib/ecsclient"
 	ec2 "github.com/aws/aws-sdk-go/service/ec2"
 	ecs "github.com/aws/aws-sdk-go/service/ecs"
 	gomock "github.com/golang/mock/gomock"
+	ecsclient "github.com/luxbet/ecs-task-kite/lib/ecsclient"
 )
 
 // Mock of AugmentedTask interface

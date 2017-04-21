@@ -19,10 +19,10 @@ import (
 
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/ecs"
-	"github.com/awslabs/ecs-task-kite/lib/ecsclient"
-	"github.com/awslabs/ecs-task-kite/lib/ecsclient/mocks/ec2"
-	"github.com/awslabs/ecs-task-kite/lib/ecsclient/mocks/ecs"
 	"github.com/golang/mock/gomock"
+	"github.com/luxbet/ecs-task-kite/lib/ecsclient"
+	"github.com/luxbet/ecs-task-kite/lib/ecsclient/mocks/ec2"
+	"github.com/luxbet/ecs-task-kite/lib/ecsclient/mocks/ecs"
 )
 
 const cluster = "testCluster"

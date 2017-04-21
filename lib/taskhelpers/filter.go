@@ -16,7 +16,7 @@ package taskhelpers
 import (
 	"fmt"
 
-	"github.com/awslabs/ecs-task-kite/lib/ecsclient"
+	"github.com/luxbet/ecs-task-kite/lib/ecsclient"
 )
 
 // ContainerPorts returns all of the ports that a given container within the

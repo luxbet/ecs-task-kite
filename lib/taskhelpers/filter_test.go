@@ -17,9 +17,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/awslabs/ecs-task-kite/lib/ecsclient"
-	mock "github.com/awslabs/ecs-task-kite/lib/ecsclient/mocks"
 	"github.com/golang/mock/gomock"
+	"github.com/luxbet/ecs-task-kite/lib/ecsclient"
+	mock "github.com/luxbet/ecs-task-kite/lib/ecsclient/mocks"
 )
 
 func TestContainerPorts(t *testing.T) {
