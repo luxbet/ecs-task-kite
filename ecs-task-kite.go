@@ -57,7 +57,7 @@ func _main() int {
 	}
 
 	client := ecsclient.New(*cluster, "", nil, nil)
-	proxyTasks(client, family, service, name, public, sleep)
+	proxyTasks(client, family, service, name, public, *sleep)
 	return 0
 }
 
