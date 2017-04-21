@@ -36,6 +36,7 @@ func _main() int {
 	service := flag.String("service", "", "Service to proxy to; *must* be the service name")
 	name := flag.String("name", "", "Container name within that task family or service")
 	loglevel := flag.String("loglevel", "info", "Loglevel panic|fatal|error|warn|info|debug")
+	sleep := flag.Int("sleep", 5, "Interval to sleep between polls of the ECS API (default 5)")
 
 	flag.Parse()
 
@@ -60,8 +61,8 @@ func _main() int {
 	return 0
 }
 
-func proxyTasks(client ecsclient.ECSSimpleClient, family, service, name *string, public *bool) {
-	taskUpdates := collectTaskUpdates(client, family, service)
+func proxyTasks(client ecsclient.ECSSimpleClient, family, service, name *string, public *bool, sleep int) {
+	taskUpdates := collectTaskUpdates(client, family, service, sleep)
 	// map of port -> proxy
 	proxies := make(map[uint16]*proxy.Proxy)
 	for tasks := range taskUpdates {
@@ -88,7 +89,7 @@ func proxyTasks(client ecsclient.ECSSimpleClient, family, service, name *string,
 	}
 }
 
-func collectTaskUpdates(client ecsclient.ECSSimpleClient, family, service *string) <-chan []ecsclient.AugmentedTask {
+func collectTaskUpdates(client ecsclient.ECSSimpleClient, family, service *string, sleep int) <-chan []ecsclient.AugmentedTask {
 	taskUpdates := make(chan []ecsclient.AugmentedTask, 0)
 	go func() {
 		for {
@@ -101,7 +102,7 @@ func collectTaskUpdates(client ecsclient.ECSSimpleClient, family, service *strin
 				taskUpdates <- tasks
 			}
 			log.Debug("Sleeping until next update")
-			time.Sleep((time.Duration(rand.Intn(5)) + 5) * time.Second)
+			time.Sleep((time.Duration(rand.Intn(5)) + sleep) * time.Second)
 		}
 	}()
 	return taskUpdates
