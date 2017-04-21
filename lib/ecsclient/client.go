@@ -25,6 +25,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/ec2metadata"
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/ec2/ec2iface"
 	"github.com/aws/aws-sdk-go/service/ecs"
@@ -213,11 +214,12 @@ func New(cluster string, region string, ecsclient ecsiface.ECSAPI, ec2client ec2
 			Transport: &userAgentedRoundTripper{},
 		}
 		cfg := &aws.Config{Region: aws.String(region), HTTPClient: customClient}
+		sess := session.Must(session.NewSession())
 		if ecsclient == nil {
-			ecsclient = ecs.New(cfg)
+			ecsclient = ecs.New(sess, cfg)
 		}
 		if ec2client == nil {
-			ec2client = ec2.New(cfg)
+			ec2client = ec2.New(sess, cfg)
 		}
 	}
 
