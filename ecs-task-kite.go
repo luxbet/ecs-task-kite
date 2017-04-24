@@ -100,7 +100,6 @@ func collectTaskUpdates(client ecsclient.ECSSimpleClient, family, service *strin
 				log.WithFields(log.Fields{
 					"family":  *family,
 					"service": *service,
-					"cluster": client.cluster,
 					"error":   strings.Replace(err.Error(), "\n", " ", -1),
 				}).Warn("Error listing tasks")
 			} else {
