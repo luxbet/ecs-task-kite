@@ -96,13 +96,19 @@ func collectTaskUpdates(client ecsclient.ECSSimpleClient, family, service *strin
 			log.Debug("Updating task list")
 			tasks, err := client.Tasks(family, service)
 			if err != nil {
-				log.Warn("Error listing tasks of family %s for %s: %s", family, service, err)
+				log.WithFields(log.Fields{
+					"family":  family,
+					"service": service,
+					"error":   err,
+				}).Warn("Error listing tasks")
 			} else {
 				log.Debug("listed tasks")
 				taskUpdates <- tasks
 			}
 			sleeptime := rand.Intn(5) + sleep
-			log.Debug("Sleeping %d seconds until next update", sleeptime)
+			log.WithFields(log.Fields{
+				"sleeptime": sleeptime,
+			}).Debug("Sleeping until next update")
 			time.Sleep(time.Duration(sleeptime) * time.Second)
 		}
 	}()
