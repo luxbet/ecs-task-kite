@@ -17,6 +17,7 @@ import (
 	"flag"
 	"math/rand"
 	"os"
+	"strings"
 	"time"
 
 	log "github.com/Sirupsen/logrus"
@@ -99,7 +100,8 @@ func collectTaskUpdates(client ecsclient.ECSSimpleClient, family, service *strin
 				log.WithFields(log.Fields{
 					"family":  *family,
 					"service": *service,
-					"error":   err,
+					"cluster": client.cluster,
+					"error":   strings.Replace(err, "\n", " ", -1),
 				}).Warn("Error listing tasks")
 			} else {
 				log.Debug("listed tasks")
