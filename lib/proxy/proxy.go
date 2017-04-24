@@ -112,8 +112,8 @@ func (p *Proxy) Serve() error {
 	for p.active {
 		conn, err := p.listener.Accept()
 		if err != nil {
-			log.Error("Error accpting connection", err)
-			continue
+			log.Error("Error accepting connection ", err)
+			return
 		}
 		log.Debug("Now listening for", p.listener.Addr().String())
 		go func(conn net.Conn) {
