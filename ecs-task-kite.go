@@ -97,8 +97,8 @@ func collectTaskUpdates(client ecsclient.ECSSimpleClient, family, service *strin
 			tasks, err := client.Tasks(family, service)
 			if err != nil {
 				log.WithFields(log.Fields{
-					"family":  family,
-					"service": service,
+					"family":  *family,
+					"service": *service,
 					"error":   err,
 				}).Warn("Error listing tasks")
 			} else {
